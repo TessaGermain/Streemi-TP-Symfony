@@ -25,26 +25,26 @@ class Playlist
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updatedAt = null;
 
-    // #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    // #[ORM\JoinColumn(nullable: false)]
-    // private ?User $user = null;
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
 
-    // /**
-    //  * @var Collection<int, PlaylistSubscription>
-    //  */
-    // #[ORM\OneToMany(targetEntity: PlaylistSubscription::class, mappedBy: 'playlist')]
-    // private Collection $playlistSubscriptions;
+    /**
+     * @var Collection<int, PlaylistSubscription>
+     */
+    #[ORM\OneToMany(targetEntity: PlaylistSubscription::class, mappedBy: 'playlist')]
+    private Collection $playlistSubscriptions;
 
-    // /**
-    //  * @var Collection<int, PlaylistMedia>
-    //  */
-    // #[ORM\OneToMany(targetEntity: PlaylistMedia::class, mappedBy: 'playlist')]
-    // private Collection $playlistMedia;
+    /**
+     * @var Collection<int, PlaylistMedia>
+     */
+    #[ORM\OneToMany(targetEntity: PlaylistMedia::class, mappedBy: 'playlist')]
+    private Collection $playlistMedia;
 
     public function __construct()
     {
-        // $this->playlistSubscriptions = new ArrayCollection();
-        // $this->playlistMedia = new ArrayCollection();
+        $this->playlistSubscriptions = new ArrayCollection();
+        $this->playlistMedia = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -88,75 +88,75 @@ class Playlist
         return $this;
     }
 
-    // public function getUser(): ?User
-    // {
-    //     return $this->user;
-    // }
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
 
-    // public function setUser(User $user): static
-    // {
-    //     $this->user = $user;
+    public function setUser(User $user): static
+    {
+        $this->user = $user;
 
-    //     return $this;
-    // }
+        return $this;
+    }
 
-    // /**
-    //  * @return Collection<int, PlaylistSubscription>
-    //  */
-    // public function getPlaylistSubscriptions(): Collection
-    // {
-    //     return $this->playlistSubscriptions;
-    // }
+    /**
+     * @return Collection<int, PlaylistSubscription>
+     */
+    public function getPlaylistSubscriptions(): Collection
+    {
+        return $this->playlistSubscriptions;
+    }
 
-    // public function addPlaylistSubscription(PlaylistSubscription $playlistSubscription): static
-    // {
-    //     if (!$this->playlistSubscriptions->contains($playlistSubscription)) {
-    //         $this->playlistSubscriptions->add($playlistSubscription);
-    //         $playlistSubscription->setPlaylist($this);
-    //     }
+    public function addPlaylistSubscription(PlaylistSubscription $playlistSubscription): static
+    {
+        if (!$this->playlistSubscriptions->contains($playlistSubscription)) {
+            $this->playlistSubscriptions->add($playlistSubscription);
+            $playlistSubscription->setPlaylist($this);
+        }
 
-    //     return $this;
-    // }
+        return $this;
+    }
 
-    // public function removePlaylistSubscription(PlaylistSubscription $playlistSubscription): static
-    // {
-    //     if ($this->playlistSubscriptions->removeElement($playlistSubscription)) {
-    //         // set the owning side to null (unless already changed)
-    //         if ($playlistSubscription->getPlaylist() === $this) {
-    //             $playlistSubscription->setPlaylist(null);
-    //         }
-    //     }
+    public function removePlaylistSubscription(PlaylistSubscription $playlistSubscription): static
+    {
+        if ($this->playlistSubscriptions->removeElement($playlistSubscription)) {
+            // set the owning side to null (unless already changed)
+            if ($playlistSubscription->getPlaylist() === $this) {
+                $playlistSubscription->setPlaylist(null);
+            }
+        }
 
-    //     return $this;
-    // }
+        return $this;
+    }
 
-    // /**
-    //  * @return Collection<int, PlaylistMedia>
-    //  */
-    // public function getPlaylistMedia(): Collection
-    // {
-    //     return $this->playlistMedia;
-    // }
+    /**
+     * @return Collection<int, PlaylistMedia>
+     */
+    public function getPlaylistMedia(): Collection
+    {
+        return $this->playlistMedia;
+    }
 
-    // public function addPlaylistMedium(PlaylistMedia $playlistMedium): static
-    // {
-    //     if (!$this->playlistMedia->contains($playlistMedium)) {
-    //         $this->playlistMedia->add($playlistMedium);
-    //         $playlistMedium->setPlaylist($this);
-    //     }
+    public function addPlaylistMedium(PlaylistMedia $playlistMedium): static
+    {
+        if (!$this->playlistMedia->contains($playlistMedium)) {
+            $this->playlistMedia->add($playlistMedium);
+            $playlistMedium->setPlaylist($this);
+        }
 
-    //     return $this;
-    // }
+        return $this;
+    }
 
-    // public function removePlaylistMedium(PlaylistMedia $playlistMedium): static
-    // {
-    //     if ($this->playlistMedia->removeElement($playlistMedium)) {
-    //         // set the owning side to null (unless already changed)
-    //         if ($playlistMedium->getPlaylist() === $this) {
-    //             $playlistMedium->setPlaylist(null);
-    //         }
-    //     }
+    public function removePlaylistMedium(PlaylistMedia $playlistMedium): static
+    {
+        if ($this->playlistMedia->removeElement($playlistMedium)) {
+            // set the owning side to null (unless already changed)
+            if ($playlistMedium->getPlaylist() === $this) {
+                $playlistMedium->setPlaylist(null);
+            }
+        }
 
-    //     return $this;
-    // }
+        return $this;
+    }
 }

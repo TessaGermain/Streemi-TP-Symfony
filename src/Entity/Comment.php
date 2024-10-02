@@ -21,28 +21,28 @@ class Comment
     private ?string $content = null;
 
     #[ORM\Column(enumType: CommentStatusEnum::class)]
-    private ?CommentStatusEnum $status = null;
+    private ?CommentStatusEnum $status = CommentStatusEnum::PENDING;
 
-    // #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'childComments')]
-    // private ?self $parentComment = null;
+    #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'childComments')]
+    private ?self $parentComment = null;
 
-    // /**
-    //  * @var Collection<int, self>
-    //  */
-    // #[ORM\OneToMany(targetEntity: self::class, mappedBy: 'parentComment')]
-    // private Collection $childComments;
+    /**
+     * @var Collection<int, self>
+     */
+    #[ORM\OneToMany(targetEntity: self::class, mappedBy: 'parentComment')]
+    private Collection $childComments;
 
-    // #[ORM\ManyToOne(inversedBy: 'comments')]
-    // #[ORM\JoinColumn(nullable: false)]
-    // private ?user $publisher = null;
+    #[ORM\ManyToOne(inversedBy: 'comments')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?user $publisher = null;
 
-    // #[ORM\ManyToOne(inversedBy: 'comments')]
-    // #[ORM\JoinColumn(nullable: false)]
-    // private ?Media $media = null;
+    #[ORM\ManyToOne(inversedBy: 'comments')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Media $media = null;
 
     public function __construct()
     {
-        // $this->childComments = new ArrayCollection();
+        $this->childComments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -74,69 +74,69 @@ class Comment
         return $this;
     }
 
-    // public function getParentComment(): ?self
-    // {
-    //     return $this->parentComment;
-    // }
+    public function getParentComment(): ?self
+    {
+        return $this->parentComment;
+    }
 
-    // public function setParentComment(?self $parentComment): static
-    // {
-    //     $this->parentComment = $parentComment;
+    public function setParentComment(?self $parentComment): static
+    {
+        $this->parentComment = $parentComment;
 
-    //     return $this;
-    // }
+        return $this;
+    }
 
-    // /**
-    //  * @return Collection<int, self>
-    //  */
-    // public function getChildComments(): Collection
-    // {
-    //     return $this->childComments;
-    // }
+    /**
+     * @return Collection<int, self>
+     */
+    public function getChildComments(): Collection
+    {
+        return $this->childComments;
+    }
 
-    // public function addChildComment(self $childComment): static
-    // {
-    //     if (!$this->childComments->contains($childComment)) {
-    //         $this->childComments->add($childComment);
-    //         $childComment->setParentComment($this);
-    //     }
+    public function addChildComment(self $childComment): static
+    {
+        if (!$this->childComments->contains($childComment)) {
+            $this->childComments->add($childComment);
+            $childComment->setParentComment($this);
+        }
 
-    //     return $this;
-    // }
+        return $this;
+    }
 
-    // public function removeChildComment(self $childComment): static
-    // {
-    //     if ($this->childComments->removeElement($childComment)) {
-    //         // set the owning side to null (unless already changed)
-    //         if ($childComment->getParentComment() === $this) {
-    //             $childComment->setParentComment(null);
-    //         }
-    //     }
+    public function removeChildComment(self $childComment): static
+    {
+        if ($this->childComments->removeElement($childComment)) {
+            // set the owning side to null (unless already changed)
+            if ($childComment->getParentComment() === $this) {
+                $childComment->setParentComment(null);
+            }
+        }
 
-    //     return $this;
-    // }
+        return $this;
+    }
 
-    // public function getPublisher(): ?user
-    // {
-    //     return $this->publisher;
-    // }
+    public function getPublisher(): ?user
+    {
+        return $this->publisher;
+    }
 
-    // public function setPublisher(?user $publisher): static
-    // {
-    //     $this->publisher = $publisher;
+    public function setPublisher(?user $publisher): static
+    {
+        $this->publisher = $publisher;
 
-    //     return $this;
-    // }
+        return $this;
+    }
 
-    // public function getMedia(): ?Media
-    // {
-    //     return $this->media;
-    // }
+    public function getMedia(): ?Media
+    {
+        return $this->media;
+    }
 
-    // public function setMedia(?Media $media): static
-    // {
-    //     $this->media = $media;
+    public function setMedia(?Media $media): static
+    {
+        $this->media = $media;
 
-    //     return $this;
-    // }
+        return $this;
+    }
 }

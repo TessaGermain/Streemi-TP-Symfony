@@ -22,15 +22,15 @@ class SubscriptionHistory
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $endDate = null;
 
-    // /**
-    //  * @var Collection<int, User>
-    //  */
-    // #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'subscriptionHistories')]
-    // private Collection $user;
+    /**
+     * @var Collection<int, User>
+     */
+    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'subscriptionHistories')]
+    private Collection $user;
 
-    // #[ORM\ManyToOne(inversedBy: 'subscriptionHistories')]
-    // #[ORM\JoinColumn(nullable: false)]
-    // private ?Subscription $subscription = null;
+    #[ORM\ManyToOne(inversedBy: 'subscriptionHistories')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Subscription $subscription = null;
 
     public function __construct()
     {
@@ -66,39 +66,39 @@ class SubscriptionHistory
         return $this;
     }
 
-    // /**
-    //  * @return Collection<int, User>
-    //  */
-    // public function getUser(): Collection
-    // {
-    //     return $this->user;
-    // }
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUser(): Collection
+    {
+        return $this->user;
+    }
 
-    // public function addUser(User $user): static
-    // {
-    //     if (!$this->user->contains($user)) {
-    //         $this->user->add($user);
-    //     }
+    public function addUser(User $user): static
+    {
+        if (!$this->user->contains($user)) {
+            $this->user->add($user);
+        }
 
-    //     return $this;
-    // }
+        return $this;
+    }
 
-    // public function removeUser(User $user): static
-    // {
-    //     $this->user->removeElement($user);
+    public function removeUser(User $user): static
+    {
+        $this->user->removeElement($user);
 
-    //     return $this;
-    // }
+        return $this;
+    }
 
-    // public function getSubscription(): ?Subscription
-    // {
-    //     return $this->subscription;
-    // }
+    public function getSubscription(): ?Subscription
+    {
+        return $this->subscription;
+    }
 
-    // public function setSubscription(?Subscription $subscription): static
-    // {
-    //     $this->subscription = $subscription;
+    public function setSubscription(?Subscription $subscription): static
+    {
+        $this->subscription = $subscription;
 
-    //     return $this;
-    // }
+        return $this;
+    }
 }

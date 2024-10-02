@@ -21,15 +21,15 @@ class Category
     #[ORM\Column(length: 255)]
     private ?string $label = null;
 
-    // /**
-    //  * @var Collection<int, Media>
-    //  */
-    // #[ORM\ManyToMany(targetEntity: Media::class, mappedBy: 'categories')]
-    // private Collection $media;
+    /**
+     * @var Collection<int, Media>
+     */
+    #[ORM\ManyToMany(targetEntity: Media::class, mappedBy: 'categories')]
+    private Collection $media;
 
     public function __construct()
     {
-        // $this->media = new ArrayCollection();
+        $this->media = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -61,31 +61,31 @@ class Category
         return $this;
     }
 
-    // /**
-    //  * @return Collection<int, Media>
-    //  */
-    // public function getMedia(): Collection
-    // {
-    //     return $this->media;
-    // }
+    /**
+     * @return Collection<int, Media>
+     */
+    public function getMedia(): Collection
+    {
+        return $this->media;
+    }
 
-    // public function addMedium(Media $medium): static
-    // {
-    //     if (!$this->media->contains($medium)) {
-    //         $this->media->add($medium);
-    //         $medium->addCategory($this);
-    //     }
+    public function addMedium(Media $medium): static
+    {
+        if (!$this->media->contains($medium)) {
+            $this->media->add($medium);
+            $medium->addCategory($this);
+        }
 
-    //     return $this;
-    // }
+        return $this;
+    }
 
-    // public function removeMedium(Media $medium): static
-    // {
-    //     if ($this->media->removeElement($medium)) {
-    //         $medium->removeCategory($this);
-    //     }
+    public function removeMedium(Media $medium): static
+    {
+        if ($this->media->removeElement($medium)) {
+            $medium->removeCategory($this);
+        }
 
-    //     return $this;
-    // }
+        return $this;
+    }
 
 }

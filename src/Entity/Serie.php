@@ -2,6 +2,19 @@
 
 namespace App\Entity;
 
-class Serie extends Media
+use App\Repository\SerieRepository;
+use Doctrine\ORM\Mapping as ORM;
+
+#[ORM\Entity(repositoryClass: SerieRepository::class)]
+class Serie
 {
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
 }

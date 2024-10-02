@@ -20,13 +20,13 @@ class WatchHistory
     #[ORM\Column]
     private ?int $numberOfViews = null;
 
-    // #[ORM\ManyToOne(inversedBy: 'watchHistories')]
-    // #[ORM\JoinColumn(nullable: false)]
-    // private ?user $user = null;
+    #[ORM\ManyToOne(inversedBy: 'watchHistories')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?user $user = null;
 
-    // #[ORM\ManyToOne(inversedBy: 'watchHistories')]
-    // #[ORM\JoinColumn(nullable: false)]
-    // private ?media $media = null;
+    #[ORM\ManyToOne(inversedBy: 'watchHistories')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?media $media = null;
 
     public function getId(): ?int
     {
@@ -57,27 +57,27 @@ class WatchHistory
         return $this;
     }
 
-    // public function getUser(): ?user
-    // {
-    //     return $this->user;
-    // }
+    public function getUser(): ?user
+    {
+        return $this->user;
+    }
 
-    // public function setUser(?user $user): static
-    // {
-    //     $this->user = $user;
+    public function setUser(?user $user): static
+    {
+        $this->user = $user;
 
-    //     return $this;
-    // }
+        return $this;
+    }
 
-    // public function getMedia(): ?media
-    // {
-    //     return $this->media;
-    // }
+    public function getMedia(): ?media
+    {
+        return $this->media;
+    }
 
-    // public function setMedia(?media $media): static
-    // {
-    //     $this->media = $media;
+    public function setMedia(?media $media): static
+    {
+        $this->media = $media;
 
-    //     return $this;
-    // }
+        return $this;
+    }
 }

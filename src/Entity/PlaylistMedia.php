@@ -17,13 +17,13 @@ class PlaylistMedia
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $addedAt = null;
 
-    // #[ORM\ManyToOne(inversedBy: 'playlistMedia')]
-    // #[ORM\JoinColumn(nullable: false)]
-    // private ?playlist $playlist = null;
+    #[ORM\ManyToOne(inversedBy: 'playlistMedia')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?playlist $playlist = null;
 
-    // #[ORM\ManyToOne(inversedBy: 'playlistMedia')]
-    // #[ORM\JoinColumn(nullable: false)]
-    // private ?media $media = null;
+    #[ORM\ManyToOne(inversedBy: 'playlistMedia')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?media $media = null;
 
     public function getId(): ?int
     {
@@ -42,27 +42,27 @@ class PlaylistMedia
         return $this;
     }
 
-    // public function getPlaylist(): ?playlist
-    // {
-    //     return $this->playlist;
-    // }
+    public function getPlaylist(): ?playlist
+    {
+        return $this->playlist;
+    }
 
-    // public function setPlaylist(?playlist $playlist): static
-    // {
-    //     $this->playlist = $playlist;
+    public function setPlaylist(?playlist $playlist): static
+    {
+        $this->playlist = $playlist;
 
-    //     return $this;
-    // }
+        return $this;
+    }
 
-    // public function getMedia(): ?media
-    // {
-    //     return $this->media;
-    // }
+    public function getMedia(): ?media
+    {
+        return $this->media;
+    }
 
-    // public function setMedia(?media $media): static
-    // {
-    //     $this->media = $media;
+    public function setMedia(?media $media): static
+    {
+        $this->media = $media;
 
-    //     return $this;
-    // }
+        return $this;
+    }
 }
