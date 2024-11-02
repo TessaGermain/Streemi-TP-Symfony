@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\PlaylistMediaRepository;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PlaylistMediaRepository::class)]
@@ -14,52 +13,52 @@ class PlaylistMedia
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $addedAt = null;
+    #[ORM\Column]
+    private ?\DateTimeImmutable $addedAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'playlistMedia')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?playlist $playlist = null;
+    private ?Playlist $playlist = null;
 
     #[ORM\ManyToOne(inversedBy: 'playlistMedia')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?media $media = null;
+    private ?Media $media = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getAddedAt(): ?\DateTimeInterface
+    public function getAddedAt(): ?\DateTimeImmutable
     {
         return $this->addedAt;
     }
 
-    public function setAddedAt(\DateTimeInterface $addedAt): static
+    public function setAddedAt(\DateTimeImmutable $addedAt): static
     {
         $this->addedAt = $addedAt;
 
         return $this;
     }
 
-    public function getPlaylist(): ?playlist
+    public function getPlaylist(): ?Playlist
     {
         return $this->playlist;
     }
 
-    public function setPlaylist(?playlist $playlist): static
+    public function setPlaylist(?Playlist $playlist): static
     {
         $this->playlist = $playlist;
 
         return $this;
     }
 
-    public function getMedia(): ?media
+    public function getMedia(): ?Media
     {
         return $this->media;
     }
 
-    public function setMedia(?media $media): static
+    public function setMedia(?Media $media): static
     {
         $this->media = $media;
 

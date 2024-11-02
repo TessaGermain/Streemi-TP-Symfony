@@ -21,7 +21,7 @@ class Comment
     private ?string $content = null;
 
     #[ORM\Column(enumType: CommentStatusEnum::class)]
-    private ?CommentStatusEnum $status = CommentStatusEnum::PENDING;
+    private ?CommentStatusEnum $status = null;
 
     #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'childComments')]
     private ?self $parentComment = null;
@@ -34,7 +34,7 @@ class Comment
 
     #[ORM\ManyToOne(inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?user $publisher = null;
+    private ?User $publisher = null;
 
     #[ORM\ManyToOne(inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: false)]
@@ -116,12 +116,12 @@ class Comment
         return $this;
     }
 
-    public function getPublisher(): ?user
+    public function getPublisher(): ?User
     {
         return $this->publisher;
     }
 
-    public function setPublisher(?user $publisher): static
+    public function setPublisher(?User $publisher): static
     {
         $this->publisher = $publisher;
 
