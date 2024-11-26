@@ -16,6 +16,12 @@ class MediaRepository extends ServiceEntityRepository
         parent::__construct($registry, Media::class);
     }
 
+    public function findPopular(int $maxResults): Collection
+    {
+        // return $this->createQueryBuilder('m')
+        //     ->leftJoin('m.watchHistories')
+    }
+
     //    /**
     //     * @return Media[] Returns an array of Media objects
     //     */
