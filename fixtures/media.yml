@@ -1,23 +1,23 @@
-App\Entity\Media:
-  media (template):
-    shortDescription: "short"
-    categories:
-      - "@category_action"
-      - "@category_adventure"
-    languages:
-      - "@lang_fr"
-      - "@lang_en"
-    releaseDate: "<dateTimeBetween('-1 week', '+1 week')>"
-    coverImage: "https://picsum.photos/id/300/400?random=<current()>"
+# App\Entity\Media:
+#   media (template):
+#     shortDescription: "short"
+#     categories:
+#       - "@category_action"
+#       - "@category_adventure"
+#     languages:
+#       - "@lang_fr"
+#       - "@lang_en"
+#     releaseDate: "<dateTimeBetween('-1 week', '+1 week')>"
+#     coverImage: "https://picsum.photos/id/300/400?random=<current()>"
 
-App\Entity\Movie:
-  movie{1..50} (extends media):
-    title: "Film <current()>"
+# App\Entity\Movie:
+#   movie{1..50} (extends media):
+#     title: "Film <current()>"
 
-App\Entity\Serie:
-  serie{1..50}:
-    title: "Serie <current()>"
+# App\Entity\Serie:
+#   serie{1..50}:
+#     title: "Serie <current()>"
 
-App\Entity\Season:
-  season{1..50}:
-    number: "<numberBetween(1, 10)>"
+# App\Entity\Season:
+#   season{1..50}:
+#     number: "<numberBetween(1, 10)>"

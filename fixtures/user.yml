@@ -1,5 +1,5 @@
-App\Entity\User:
-  user_{1..50}:
-    username: "<name()>"
-    email: "<email()>"
-    password: "<password()>"
+# App\Entity\User:
+#   user_{1..50}:
+#     username: "<name()>"
+#     email: "<email()>"
+#     password: "<password()>"
