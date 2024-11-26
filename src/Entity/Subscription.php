@@ -33,7 +33,7 @@ class Subscription
     /**
      * @var Collection<int, SubscriptionHistory>
      */
-    #[ORM\OneToMany(targetEntity: SubscriptionHistory::class, mappedBy: 'subscription', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: SubscriptionHistory::class, mappedBy: 'subscription')]
     private Collection $subscriptionHistories;
 
     public function __construct()

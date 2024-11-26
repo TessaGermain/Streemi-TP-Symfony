@@ -5,13 +5,21 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\CategoryRepository;
+use App\Entity\Category;
 
 class MediaController extends AbstractController
 {
-    #[Route('/category', name: 'category')]
-    public function category(): Response
+    #[Route('/category/{id}', name: 'category')]
+    public function category(
+        string $id,
+        Category $category
+    ): Response
     {
-        return $this->render('media/category.html.twig');
+        return $this->render('media/category.html.twig', [
+            'category' => $category
+        ]);
     }
 
     #[Route('/detail_serie', name: 'detail_serie')]
@@ -20,16 +28,27 @@ class MediaController extends AbstractController
         return $this->render('media/detail_serie.html.twig');
     }
 
-    #[Route('/detail', name: 'detail')]
-    public function detail(): Response
+    #[Route('/detail/{id}', name: 'detail')]
+    public function detail(
+        string $id,
+        Movie $movie
+    ): Response
     {
-        return $this->render('media/detail.html.twig');
+        return $this->render('media/detail.html.twig', [
+            'movie' => $movie
+        ]);
     }
 
     #[Route('/discover', name: 'discover')]
-    public function discover(): Response
+    public function discover(
+        EntityManagerInterface $entityManager,
+        CategoryRepository $categoryRepository,
+    ): Response
     {
-        return $this->render('media/discover.html.twig');
+        $categories = $categoryRepository->findAll();
+        return $this->render('media/discover.html.twig', [
+            'categories' => $categories
+        ]);
     }
 
     #[Route('/upload', name: 'upload')]

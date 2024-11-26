@@ -3,9 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\SubscriptionHistoryRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SubscriptionHistoryRepository::class)]
@@ -16,76 +13,57 @@ class SubscriptionHistory
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $startDate = null;
+    #[ORM\Column]
+    private ?\DateTimeImmutable $startAt = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $endDate = null;
+    #[ORM\Column]
+    private ?\DateTimeImmutable $endAt = null;
 
-    /**
-     * @var Collection<int, User>
-     */
-    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'subscriptionHistories')]
-    private Collection $user;
+    #[ORM\ManyToOne(inversedBy: 'subscriptionHistories')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $subscriber = null;
 
     #[ORM\ManyToOne(inversedBy: 'subscriptionHistories')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Subscription $subscription = null;
-
-    public function __construct()
-    {
-        $this->user = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getStartDate(): ?\DateTimeInterface
+    public function getStartAt(): ?\DateTimeImmutable
     {
-        return $this->startDate;
+        return $this->startAt;
     }
 
-    public function setStartDate(\DateTimeInterface $startDate): static
+    public function setStartAt(\DateTimeImmutable $startAt): static
     {
-        $this->startDate = $startDate;
+        $this->startAt = $startAt;
 
         return $this;
     }
 
-    public function getEndDate(): ?\DateTimeInterface
+    public function getEndAt(): ?\DateTimeImmutable
     {
-        return $this->endDate;
+        return $this->endAt;
     }
 
-    public function setEndDate(\DateTimeInterface $endDate): static
+    public function setEndAt(\DateTimeImmutable $endAt): static
     {
-        $this->endDate = $endDate;
+        $this->endAt = $endAt;
 
         return $this;
     }
 
-    /**
-     * @return Collection<int, User>
-     */
-    public function getUser(): Collection
+    public function getSubscriber(): ?User
     {
-        return $this->user;
+        return $this->subscriber;
     }
 
-    public function addUser(User $user): static
+    public function setSubscriber(?User $subscriber): static
     {
-        if (!$this->user->contains($user)) {
-            $this->user->add($user);
-        }
-
-        return $this;
-    }
-
-    public function removeUser(User $user): static
-    {
-        $this->user->removeElement($user);
+        $this->subscriber = $subscriber;
 
         return $this;
     }

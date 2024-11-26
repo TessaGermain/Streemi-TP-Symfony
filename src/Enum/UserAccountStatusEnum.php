@@ -7,5 +7,6 @@
     case BLOCKED = "blocked";
     case BANNED = "banned";
     case DELETED = "deleted";
+    case INACTIVE = "inactive";
    }
 ?>
