@@ -1,13 +1,13 @@
-# App\Entity\Category:
-#   category_action:
-#     nom: "action"
-#     label: "Action"
-#   category_adventure:
-#     nom: "aventure"
-#     label: "Aventure"
-#   category_comedy:
-#     nom: "comedy"
-#     label: "Comédie"
-#   category_horror:
-#     nom: "horror"
-#     label: "Horreur"
+App\Entity\Category:
+  category_action:
+    nom: "action"
+    label: "Action"
+  category_adventure:
+    nom: "aventure"
+    label: "Aventure"
+  category_comedy:
+    nom: "comedy"
+    label: "Comédie"
+  category_horror:
+    nom: "horror"
+    label: "Horreur"
