@@ -14,7 +14,7 @@ class HomeController extends AbstractController
         MediaRepository $mediaRepository
     ): Response
     {
-        $medias = $mediaRepository->findPopular(10);
+        // $medias = $mediaRepository->findPopular(10);
         return $this->render('index.html.twig');
     }
 }

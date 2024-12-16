@@ -5,5 +5,6 @@
     case PUBLISH = "publish";
     case PENDING = "pending";
     case REJECT = "reject";
+    case VALIDATED = "validated";
    }
 ?>
